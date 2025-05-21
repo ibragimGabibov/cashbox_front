@@ -10,7 +10,7 @@ const Login = ({ setUser }) => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('YOUR_RENDER_BACKEND_URL/api/login', { email, password });
+      const response = await axios.post('https://cashbox-back.onrender.com/api/login', { email, password });
       setUser(response.data.user);
       localStorage.setItem('token', response.data.token);
     } catch (err) {
@@ -77,7 +77,7 @@ const App = () => {
     const token = localStorage.getItem('token');
     if (token) {
       // Проверка токена на бэкенде
-      axios.get('YOUR_RENDER_BACKEND_URL/api/verify', {
+      axios.get('https://cashbox-back.onrender.com/api/verify', {
         headers: { Authorization: `Bearer ${token}` }
       }).then(res => setUser(res.data.user)).catch(() => localStorage.removeItem('token'));
     }
